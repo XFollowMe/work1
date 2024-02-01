@@ -1,15 +1,32 @@
+class Book:
+    """ Базовый класс книги. """
+    def __init__(self, name: str, author: str):
+        self._name = name
+        self._author = author
 
-def find_index(items, item):
-    for index, i in enumerate(items):
-        if i == item:
-            return index
+    def __str__(self):
+        return f"Книга {self.name}. Автор {self.author}"
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}(name={self.name!r}, author={self.author!r})"
 
 
-items_list = ['яблоко', 'банан', 'апельсин', 'груша', 'киви', 'банан']
+class PaperBook(Book):
+    def __init__(self, name: str, author: str, pages: int):
+        self._name = name
+        self._author = author
+        if not isinstance(pages,int):
+            raise TypeError
+        if pages < 6:
+            raise ValueError
+        self.pages = pages
 
-for find_item in ['банан', 'груша', 'персик']:
-    index_item =find_index(items_list,find_item)
-    if index_item is not None:
-        print(f"Первое вхождение товара '{find_item}' имеет индекс {index_item}.")
-    else:
-        print(f"Товар '{find_item}' не найден в списке.")
+class AudioBook(Book):
+    def __init__(self, name: str, author: str, duration: float):
+        self._name = name
+        self._author = author
+        if not isinstance(duration,(float,int)):
+            raise TypeError
+        if duration <= 1:
+            raise ValueError
+        self.duration = duration
