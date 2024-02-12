@@ -24,11 +24,11 @@ class Book:
         return f"Book(id_={self.id_}, name='{self.name}', pages={self.pages})"
 class Library:
     count = 0
-    def __init__(self, books = {}):
-        self.books = books
+    def __init__(self, books = None):
+        self.books = [] if books is None else books
         ...
     def get_next_book_id(self):
-        if len(self.books) == 0:
+        if not self.books:
             return 1
         else:
             return self.books[-1].id_+1
